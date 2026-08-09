@@ -1,0 +1,10 @@
+# Dependencies
+node_modules/
+
+# Environment variables and secrets
+.env
+.env.local
+
+# Log files and OS files
+*.log
+.DS_Store

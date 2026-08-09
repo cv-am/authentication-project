@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Management Portal</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div id="alertBox" class="alert-box hidden"></div>
+
+  <!-- AUTHENTICATION CARD -->
+  <div id="authContainer" class="card">
+    <div class="tab-header">
+      <button id="loginTab" class="tab-btn active">Login</button>
+      <button id="registerTab" class="tab-btn">Register</button>
+    </div>
+
+    <!-- Login Form -->
+    <form id="loginForm" class="auth-form">
+      <h2>Welcome Back</h2>
+      <p class="subtitle">Enter your credentials to sign in</p>
+      
+      <div class="input-group">
+        <label for="loginUsername">Username</label>
+        <input type="text" id="loginUsername" required placeholder="username" />
+      </div>
+
+      <div class="input-group">
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" required placeholder="••••••••" />
+      </div>
+
+      <button type="submit" class="btn primary-btn">Sign In</button>
+    </form>
+
+    <!-- Register Form -->
+    <form id="registerForm" class="auth-form hidden">
+      <h2>Create Account</h2>
+      <p class="subtitle">Fill in your details to register</p>
+
+      <div class="input-group">
+        <label for="regName">Full Name</label>
+        <input type="text" id="regName" required placeholder="John Doe" />
+      </div>
+
+      <div class="input-group">
+        <label for="regUsername">Username</label>
+        <input type="text" id="regUsername" required placeholder="johndoe" />
+      </div>
+
+      <div class="input-group">
+        <label for="regEmail">Email Address</label>
+        <input type="email" id="regEmail" required placeholder="john@example.com" />
+      </div>
+
+      <div class="input-group">
+        <label for="regPassword">Password</label>
+        <input type="password" id="regPassword" required placeholder="••••••••" />
+      </div>
+
+      <button type="submit" class="btn primary-btn">Register</button>
+    </form>
+  </div>
+
+  <!-- DASHBOARD CARD -->
+  <div id="dashboardContainer" class="card dashboard-card hidden">
+    <div class="dashboard-header">
+      <h2>User Profile</h2>
+      <button id="logoutBtn" class="btn secondary-btn">Logout</button>
+    </div>
+
+    <div class="profile-info">
+      <p><strong>Name:</strong> <span id="profileName">-</span></p>
+      <p><strong>Username:</strong> <span id="profileUsername">-</span></p>
+      <p><strong>Email:</strong> <span id="profileEmail">-</span></p>
+    </div>
+
+    <details class="accordion">
+      <summary>Edit Profile Details</summary>
+      <form id="updateProfileForm" class="inner-form">
+        <div class="input-group">
+          <label for="updateName">Name</label>
+          <input type="text" id="updateName" required />
+        </div>
+        <div class="input-group">
+          <label for="updateUsername">Username</label>
+          <input type="text" id="updateUsername" required />
+        </div>
+        <div class="input-group">
+          <label for="updateEmail">Email</label>
+          <input type="email" id="updateEmail" required />
+        </div>
+        <button type="submit" class="btn primary-btn">Save Changes</button>
+      </form>
+    </details>
+
+    <details class="accordion">
+      <summary>Change Password</summary>
+      <form id="changePasswordForm" class="inner-form">
+        <div class="input-group">
+          <label for="currentPass">Current Password</label>
+          <input type="password" id="currentPass" required />
+        </div>
+        <div class="input-group">
+          <label for="newPass">New Password</label>
+          <input type="password" id="newPass" required />
+        </div>
+        <button type="submit" class="btn primary-btn">Update Password</button>
+      </form>
+    </details>
+
+    <details class="accordion danger-accordion">
+      <summary>Delete Account</summary>
+      <form id="deleteAccountForm" class="inner-form">
+        <p class="warning-text">Enter your password to confirm account removal.</p>
+        <div class="input-group">
+          <label for="deleteConfirmPass">Confirm Password</label>
+          <input type="password" id="deleteConfirmPass" required />
+        </div>
+        <button type="submit" class="btn danger-btn">Delete Account</button>
+      </form>
+    </details>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
