@@ -1,5 +1,6 @@
 import express from "express";
-import { authVerify } from "../middleware/auth.middleware.js"
+import { authVerify } from "../middleware/auth.middleware.js";
+import { userRegistrationRules,validateResult } from "../middleware/validation.middleware.js";
 import { 
     userRegistration,
     userLogin,
@@ -12,7 +13,7 @@ import {
 
 const route = express.Router()
 
-route.post("/register",userRegistration)
+route.post("/register",userRegistration,validateResult,userRegistration)
 route.post("/login",userLogin)
 route.get("/profile",authVerify,userProfile)
 route.put("/profile/update",authVerify,userUpdate)
