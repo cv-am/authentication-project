@@ -6,7 +6,8 @@ import {
     profileUser,
     updateUser,
     updatePassword,
-    deleteUser 
+    deleteUser ,
+    getAll
 } from "./query.js"
 
 export const userRegistration = async (req,res) => {
@@ -30,7 +31,7 @@ export const userRegistration = async (req,res) => {
                 message: "Registration failed!"
             })
         }
-        res.json({
+        res.status(201).json({
             message: "User registered successfully"
         })
     } catch (error) {
@@ -62,6 +63,7 @@ export const userLogin = async (req,res) => {
                 name: user.name,
                 username: user.username,
                 email: user.email,
+                role: user.role
             },
             process.env.JWT_SECRET,
             { expiresIn: "1h" }
@@ -105,7 +107,7 @@ export const userUpdate = async (req,res) => {
         if(result.affectedRows===0){
             return res.status(500).json({message:"Profile update failed"})
         }
-        res.json({message:"Profile updated successfully"})
+        res.status(201).json({message:"Profile updated successfully"})
     } catch (error) {
         console.log(error)
     }
@@ -175,4 +177,15 @@ export const userLogout = async (req,res) => {
         console.log(error)
     }
 
+}
+
+export const getAllUser = async (req,res) => {
+    try {
+        const result = await getAll()
+        return res.json({
+            all_data:result
+        })
+    } catch (error) {
+        console.log(error)
+    }
 }

@@ -13,7 +13,7 @@ export const userRegistrationRules = [
     body("email").isEmail().withMessage("Invalid email address"),
 
     body("password")
-      .isLength({ min: 8, max: 20 }).withMessage("Password must be at least 8 characters long")
+    .isLength({ min: 8, max: 20 }).withMessage("Password must be at least 8 characters long")
 ];
 
 export const validateResult = (req, res, next) => {

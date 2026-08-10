@@ -5,6 +5,7 @@ const updateQuery = "update user_data set name=?,username=?,email=? where id=?"
 const updatePasswordQuery = "update user_data set password=? where id=?"
 const selectQuery = "select * from user_data where username = ?"
 const deleteQuery = "delete from user_data where id = ?"
+const selectAll = "select * from user_data"
 
 export const registerUser = async (userData) => {
     try {
@@ -54,6 +55,15 @@ export const updatePassword = async (newPassword) => {
 export const deleteUser = async (id) => {
     try {
         const [result] = await pool.query(deleteQuery,id)
+        return result
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const getAll = async () => {
+    try {
+        const [result] = await pool.query(selectAll)
         return result
     } catch (error) {
         console.log(error)
