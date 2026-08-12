@@ -23,3 +23,8 @@ export const validateResult = (req, res, next) => {
     }
     next();
 }
+
+export const userLoginRules = [
+    body("username").notEmpty().withMessage("Username or Email is required"),
+    body("password").notEmpty().withMessage("Password is required")
+];

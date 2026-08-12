@@ -1,7 +1,8 @@
 import express from "express";
 import { authVerify } from "../middleware/auth.middleware.js";
-import { userRegistrationRules,validateResult } from "../middleware/validation.middleware.js";
+import { userRegistrationRules,userLoginRules,validateResult } from "../middleware/validation.middleware.js";
 import { roleVerify } from "../middleware/role.middleware.js";
+import { registerLimiter,loginLimiter } from "../middleware/rate-limit.middleware.js";
 import { 
     userRegistration,
     userLogin,
@@ -15,8 +16,8 @@ import {
 
 const route = express.Router()
 
-route.post("/register",validateResult,userRegistration)
-route.post("/login",userLogin)
+route.post("/register",registerLimiter,userRegistrationRules,validateResult,userRegistration)
+route.post("/login",loginLimiter,userLoginRules,validateResult,userLogin)
 route.get("/profile",authVerify,userProfile)
 route.put("/profile/update",authVerify,userUpdate)
 route.patch("/password",authVerify,changePassword)
