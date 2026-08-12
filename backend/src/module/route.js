@@ -11,7 +11,8 @@ import {
     changePassword,
     deleteProfile,
     userLogout,
-    getAllUser
+    getAllUser,
+    removeUser
 } from "./controller.js";
 
 const route = express.Router()
@@ -23,6 +24,7 @@ route.put("/profile/update",authVerify,userUpdate)
 route.patch("/password",authVerify,changePassword)
 route.delete("/profile/remove",authVerify,deleteProfile)
 route.get("/logout",authVerify,userLogout)
-route.get("/getall",authVerify,roleVerify(["admin","manager"]),getAllUser)
+route.get("/admin/alluser",authVerify,roleVerify(["admin","manager"]),getAllUser)
+route.delete("/admin/remove",authVerify,roleVerify(["admin"]),removeUser)
 
 export default route  

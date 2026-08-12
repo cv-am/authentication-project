@@ -189,3 +189,19 @@ export const getAllUser = async (req,res) => {
         console.log(error)
     }
 }
+
+export const removeUser = async (req,res) => {
+    try {
+        const id = req.body.id
+        if(!id){
+            return res.status(400).json({message:"Id to daaliye admin ji!"})
+        }
+        const result = await deleteUser([id])
+        if(result.affectedRows===0){
+            return res.status(500).json({message:"Operation failed!"})
+        }
+        return res.json({message:"User removed successfully"})
+    } catch (error) {
+        console.log(error)
+    }
+}
