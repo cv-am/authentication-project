@@ -1,29 +1,23 @@
 import express from "express";
-import cookieParser from "cookie-parser";
-import cors from "cors";
-import path from "path";
-import { fileURLToPath } from "url";
-import route from "./module/route.js";
-import { globalLimiter } from "./middleware/rate-limit.middleware.js";
+import authRouter from "./module/auth/route.js";
+import errorHandler from "./middleware/error.middleware.js";
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
 
 const app = express()
 
-app.use(cors({
-  origin: true,
-  credentials: true 
-}));
 
 app.use(express.json())
-app.use(cookieParser())
 
+app.use("/health", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "API is healthy"
+  })
+})
 
+app.use("/api/v1/auth", authRouter)
 
-app.use(globalLimiter)
-app.use("/api",route)
-
-app.use(express.static(path.join(__dirname, "../../public")))
+//Error handling middleware must come after routes
+app.use(errorHandler)
 
 export default app
